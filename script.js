@@ -139,4 +139,44 @@ setInterval(drawSnowflakes, 10);
 document.querySelector('a[href="#pricing"]').addEventListener('click', (e) => {
   e.preventDefault();
   document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });
+
 });
+
+// Check if certain extension objects exist
+if (typeof someNuiToolObject !== 'undefined') {
+  console.log('NUI tool detected');
+  // Implement workarounds or show warning
+}
+
+document.addEventListener('touchstart', function(e) {
+  e.preventDefault();
+}, { passive: false });
+
+document.addEventListener('touchmove', function(e) {
+  e.preventDefault();
+}, { passive: false });
+
+document.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+});
+document.addEventListener('selectstart', function(e) {
+  e.preventDefault();
+});
+
+// CSS approach (more reliable)
+document.head.insertAdjacentHTML('beforeend', `
+  <style>
+    * {
+      user-select: none;
+      -webkit-user-select: none;
+    }
+  </style>
+`);
+document.documentElement.requestFullscreen();
+// This is easily bypassable and not reliable
+setInterval(function() {
+  if (window.outerWidth - window.innerWidth > 200 || 
+      window.outerHeight - window.innerHeight > 200) {
+    document.body.innerHTML = 'Please disable developer tools';
+  }
+}, 1000);
