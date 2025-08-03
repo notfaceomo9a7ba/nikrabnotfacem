@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scanner.ac - Admin Panel</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .admin-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .admin-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 25px rgba(0,255,150,0.15);
+    }
+    
+    .admin-card h2 {
+      color: #00ffa6;
+      border-bottom: 1px solid #00ffa6;
+      padding-bottom: 10px;
+    }
+    
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    
+    .admin-table th, .admin-table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .admin-table th {
+      background: rgba(0, 255, 166, 0.1);
+      color: #00ffa6;
+    }
+    
+    .btn {
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-primary {
+      background-color: #00ffa6;
+      color: #000;
+    }
+    
+    .btn-danger {
+      background-color: #ff006a;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <img src="logo.png" alt="Scanner.ac Logo" height="40" />
+    </div>
+    <nav class="header-buttons">
+      <a href="admin.html" class="neon-nav-btn">Dashboard</a>
+      <a href="admin-users.html" class="neon-nav-btn">Users</a>
+      <a href="admin-settings.html" class="neon-nav-btn">Settings</a>
+      <a href="logout.html" class="neon-nav-btn">Logout</a>
+    </nav>
+  </header>
+
+  <!-- Admin Content -->
+  <div class="admin-container">
+    <h1>Admin Dashboard</h1>
+    
+    <div class="admin-stats">
+      <div class="admin-card">
+        <h2>Quick Stats</h2>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <h3>Total Users</h3>
+            <p>1,245</p>
+          </div>
+          <div class="stat-box">
+            <h3>Active Today</h3>
+            <p>328</p>
+          </div>
+          <div class="stat-box">
+            <h3>New This Week</h3>
+            <p>142</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="admin-card">
+        <h2>Recent Activity</h2>
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Action</th>
+              <th>Time</th>
+              <th>IP</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>user123</td>
+              <td>Logged in</td>
+              <td>5 mins ago</td>
+              <td>192.168.1.1</td>
+            </tr>
+            <tr>
+              <td>admin</td>
+              <td>Changed settings</td>
+              <td>12 mins ago</td>
+              <td>192.168.1.2</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="admin-card">
+        <h2>Quick Actions</h2>
+        <div class="action-buttons">
+          <button class="btn btn-primary">Add New User</button>
+          <button class="btn btn-primary">View Reports</button>
+          <button class="btn btn-danger">Clear Logs</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+  <script>
+    // Add admin specific JavaScript here
+    document.addEventListener('DOMContentLoaded', function() {
+      // Check if user is admin
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (!user || !user.email.endsWith('@admin.scanner.ac')) {
+          window.location.href = 'login.html';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+
+<!-- Modify the stats section -->
+<div class="admin-card">
+  <h2>Quick Stats</h2>
+  <div class="stats-grid">
+    <div class="stat-box">
+      <h3>Total Users</h3>
+      <p id="totalUsers">Loading...</p>
+    </div>
+    <div class="stat-box">
+      <h3>Active Today</h3>
+      <p id="activeToday">Loading...</p>
+    </div>
+    <div class="stat-box">
+      <h3>New This Week</h3>
+      <p id="newThisWeek">Loading...</p>
+    </div>
+  </div>
+</div>
+
+<!-- Modify the activity section -->
+<div class="admin-card">
+  <h2>Recent Activity</h2>
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Action</th>
+        <th>Time</th>
+        <th>IP</th>
+      </tr>
+    </thead>
+    <tbody id="recentActivity">
+      <tr>
+        <td colspan="4">Loading activity...</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', async function() {
+    // Check admin status first
+    const user = firebase.auth().currentUser;
+    if (!user || !user.email.endsWith('@admin.scanner.ac')) {
+      window.location.href = 'login.html';
+      return;
+    }
+
+    // Load statistics
+    try {
+      // Load stats in parallel
+      const [totalUsers, activeToday, newThisWeek] = await Promise.all([
+        getTotalUsers(),
+        getActiveToday(),
+        getNewThisWeek()
+      ]);
+      
+      document.getElementById('totalUsers').textContent = totalUsers.toLocaleString();
+      document.getElementById('activeToday').textContent = activeToday.toLocaleString();
+      document.getElementById('newThisWeek').textContent = newThisWeek.toLocaleString();
+      
+      // Load recent activity
+      const activities = await getRecentActivity();
+      const activityTable = document.getElementById('recentActivity');
+      activityTable.innerHTML = '';
+      
+      activities.forEach(activity => {
+        const row = document.createElement('tr');
+        
+        row.innerHTML = `
+          <td>${activity.username || activity.email}</td>
+          <td>${activity.action}</td>
+          <td>${formatTime(activity.timestamp?.toDate())}</td>
+          <td>${activity.ip || 'N/A'}</td>
+        `;
+        
+        activityTable.appendChild(row);
+      });
+      
+    } catch (error) {
+      console.error('Error loading admin data:', error);
+      alert('Error loading admin data. Check console for details.');
+    }
+  });
+
+  // Helper function to format time
+  function formatTime(date) {
+    if (!date) return 'N/A';
+    return date.toLocaleString();
+  }
+</script>
+
+<div class="admin-card">
+  <h2>Quick Stats</h2>
+  <div class="stats-grid">
+    <div class="stat-box">
+      <h3>Total Users</h3>
+      <p id="totalUsers"><i class="fas fa-spinner fa-spin"></i> Loading...</p>
+    </div>
+    <div class="stat-box">
+      <h3>Active Today</h3>
+      <p id="activeToday"><i class="fas fa-spinner fa-spin"></i> Loading...</p>
+    </div>
+    <div class="stat-box">
+      <h3>New This Week</h3>
+      <p id="newThisWeek"><i class="fas fa-spinner fa-spin"></i> Loading...</p>
+    </div>
+  </div>
+</div>
+
+<div class="admin-card">
+  <h2>Recent Activity</h2>
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Action</th>
+        <th>Time</th>
+        <th>IP</th>
+      </tr>
+    </thead>
+    <tbody id="recentActivity">
+      <tr>
+        <td colspan="4"><i class="fas fa-spinner fa-spin"></i> Loading activity...</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
