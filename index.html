@@ -1,383 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Scanner.ac</title>
-  <link rel="stylesheet" href="style.css" />
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
-
-</head>
-
-  <!-- Snow Canvas -->
-  <canvas id="snowCanvas"></canvas>
-
-  <!-- Header -->
-  <header>
-    <div class="logo">
-      <img src="logo.png" alt="Scanner.ac Logo" height="40" />
-     </div>
-    <nav class="header-buttons">
-            <a href="#pricing" class="neon-nav-btn">Price</a>
-        <a href="https://discord.gg/PJf2Be9m" target="_blank" class="neon-nav-btn">Discord</a>
-      <a href="#changelog" class="neon-nav-btn">Changelog</a>
-    <a href="login.html" class="neon-nav-btn">Login</a> <!-- تم التعديل هنا -->
-    </nav>
-  </header>
-  
-  <!-- Login Menu (Hidden) -->
-  <div id="settingsMenu" class="hidden menu">
-    <ul>
-      <li>👤 Account</li>
-      <li>🚪 Logout</li>
-    </ul>
-  </div>
-
-  <!-- Hero Section -->
-  <section class="hero">
-    <h1>Detecting Game Hackers Like Never Before</h1>
-    <p>A forensic anticheat method no one knows about</p>
-    <div class="buttons">
-      <a href="https://discord.gg/PJf2Be9m" class="buy-button" target="_blank">Buy Now!</a>
-      <button id="learnMoreBtn" class="outline">Learn More</button>
-    </div>
-  </section>
-
-  <!-- Info Box -->
-  <section id="infoBox" class="hidden">
-    <h2>What is <span class="highlight">Scanner?</span></h2>
-    <p>
-      Unlike real-time AntiCheat solutions, <span class="highlight">scanner.ac</span> conducts a deep forensic investigation of a suspect's PC in under
-      <span class="highlight">1 minute</span>, uncovering hidden hack injections, sophisticated hacking techniques, and anti-forensic modifications.
-    </p>
-    <p class="subtext">
-      Scanner.ac is a forensic PC AntiCheat scanner that uncovers injected cheats, memory manipulation, and stealth tools, providing 
-      <span class="highlight">irrefutable proof</span> of tampering.
-    </p>
-  </section>
-
-  <!-- Pricing Section -->
-  <section id="pricing" class="pricing">
-    <div class="plan">
-      <h3>One Month</h3>
-      <p class="sub">Basic starter plan.</p>
-      <h2>10$ <span>/Per Month</span></h2>
-      <a href="https://discord.gg/PJf2Be9m" class="buy-button" target="_blank">Buy Now!</a>
-      <ul>
-        <li>✔ Efficient Detections</li>
-        <li>✔ Bypass Alert</li>
-        <li>✔ +10.000 Strings</li>
-        <li>✔ Frequent Updates</li>
-        <li>✔ Custom-Strings</li>
-      </ul>
-    </div>
-
-    <div class="plan featured">
-      <div class="badge">Most Popular</div>
-      <h3>Lifetime</h3>
-      <p class="sub">Permanent plan.</p>
-      <h2>30$ <span>/Lifetime</span></h2>
-      <a href="https://discord.gg/PJf2Be9m" class="buy-button" target="_blank">Buy Now!</a>
-      <ul>
-        <li>✔ Efficient Detections</li>
-        <li>✔ Bypass Alerts</li>
-        <li>✔ +10.000 Strings</li>
-        <li>✔ Frequent Updates</li>
-        <li>✔ Custom-Strings</li>
-        <li>✔ Active supports</li>
-      </ul>
-    </div>
-
-    <div class="plan">
-      <h3>Three Months</h3>
-      <p class="sub">Intermediate sequential plan.</p>
-      <h2>20$ <span>/Per 3 Months</span></h2> 
-      <a href="https://discord.gg/PJf2Be9m" class="buy-button" target="_blank">Buy Now!</a>
-      <ul>
-        <li>✔ Efficient Detections</li>
-        <li>✔ Bypass Alerts</li>
-        <li>✔ +10.000 Strings</li>
-        <li>✔ Frequent Updates</li>
-        <li>✔ Custom-Strings</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- Changelog Section -->
-  <section id="changelog" class="changelog">
-    <h2>Changelogs</h2>
-    <div class="changelog-box">
-      <h3>Version <strong>8.1.7</strong> <span class="date">03/05/2025</span></h3>
-
-      <div class="log-category added">
-        <h4>Added</h4>
-        <ul>
-          <li>Strings and Yara for Bypass and Cheats.</li>
-          <li>More Bypass Detections.</li>
-          <li>New detections Prefetch Methods.</li>
-          <li>Detect Hidden wow6432 startups.</li>
-          <li>Dll Hijacking Known dlls.</li>
-          <li>Check Appinit dlls.</li>
-          <li>WMI Event Filter.</li>
-        </ul>
-      </div>
-
-      <div class="log-category improved">
-        <h4>Improvement</h4>
-        <ul>
-          <li>Prefetch Check.</li>
-          <li>Invalid Signature Check.</li>
-          <li>Security.</li>
-        </ul>
-      </div>
-
-      <div class="log-category fixed">
-        <h4>Fixed</h4>
-        <ul>
-          <li>No more false detections by Antivirus.</li>
-          <li>Changes to some texts for better understanding.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-
-
-  <script src="script.js"></script>
-  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  <div id="particles-js"></div>
-  <script>
-    particlesJS("particles-js", {
-      particles: {
-        number: {
-          value: 150,
-          density: { enable: true, value_area: 800 }
-        },
-        color: { value: "#ff0000" },
-        shape: {
-          type: "circle",
-          stroke: { width: 0, color: "#000000" },
-          polygon: { nb_sides: 5 },
-        },
-        opacity: {
-          value: 0.6,
-          random: false,
-          anim: { enable: false }
-        },
-        size: {
-          value: 3,
-          random: true,
-          anim: { enable: false }
-        },
-        line_linked: {
-          enable: true,
-          distance: 200,
-          color: "#ff0000",
-          opacity: 0.4,
-          width: 1
-        },
-        move: {
-          enable: true,
-          speed: 2,
-          direction: "none",
-          random: false,
-          straight: false,
-          bounce: false
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>discord.gg/R.I.S.K</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('https://i.pinimg.com/originals/51/ae/a3/51aea3393b8234a1e69d8713a0a58bc3.gif') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Courier New', Courier, monospace;
+            color: #0000ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            text-align: center;
         }
-      },
-      interactivity: {
-        detect_on: "canvas",
-        events: {
-          onhover: { enable: true, mode: "grab" },
-          onclick: { enable: false },
-          resize: true
-        },
-        modes: {
-          grab: { distance: 150, line_linked: { opacity: 0.6 } }
+        .image-container img {
+            width: 750px; 
+            height: auto;
+            border: 2px solid #0000ff; 
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 255, 0.7); 
         }
-      },
-      retina_detect: true
-    });
-  </script>
-  <footer class="site-footer">
-  <div class="footer-left">
-    <h2>Scanner.ac</h2>
-    <p>Copyright © Scanner.ac 2025</p>
-  </div>
-  <div class="footer-right">
-    <a href="#" class="icon"><i class="fab fa-discord"></i></a>
-    <a href="#" class="icon"><i class="fab fa-tiktok"></i></a>
-    <a href="#" class="icon"><i class="fab fa-youtube"></i></a>
-  </div>
-</footer>
-</body>
-</html>
-
-<!-- في header -->
-<nav class="header-buttons">
-  <a href="#pricing" class="neon-nav-btn">Price</a>
-  <a href="https://discord.gg/PJf2Be9m" target="_blank" class="neon-nav-btn">Discord</a>
-  <a href="#changelog" class="neon-nav-btn">Changelog</a>
-  <button id="loginToggle" class="neon-nav-btn">
-    <span id="userStatus">Login</span>
-  </button>
-</nav>
-
-<!-- في نهاية body قبل إغلاق html -->
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-<script>
-  // Initialize Firebase
-  const firebaseConfig = {
-    apiKey: "AIzaSyD866UISZ-U3lhUzuSQYydNaQzEd-eH03o",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
-  };
-
-  firebase.initializeApp(firebaseConfig);
-  
-  // Check auth state
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-      document.getElementById('userStatus').textContent = 'Account';
-      document.getElementById('settingsMenu').innerHTML = `
-        <ul>
-          <li>👤 ${user.email}</li>
-          <li><a href="#" id="logoutBtn">🚪 Logout</a></li>
-        </ul>
-      `;
-      
-      document.getElementById('logoutBtn').addEventListener('click', () => {
-        firebase.auth().signOut().then(() => {
-          window.location.reload();
-        });
-      });
-    } else {
-      document.getElementById('userStatus').textContent = 'Login';
-      document.getElementById('settingsMenu').innerHTML = `
-        <ul>
-          <li><a href="login.html">👤 Login</a></li>
-          <li><a href="register.html">📝 Register</a></li>
-        </ul>
-      `;
-    }
-  });
-</script>
-
-
-
-
-
-
-
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-<script>
-  // Initialize Firebase
-  const firebaseConfig = {
-    apiKey: "AIzaSyD866UISZ-U3lhUzuSQYydNaQzEd-eH03o",
-    authDomain: "scanner-ac.firebaseapp.com",
-    projectId: "scanner-ac",
-    storageBucket: "scanner-ac.appspot.com",
-    messagingSenderId: "1234567890",
-    appId: "1:1234567890:web:abcdef123456"
-  };
-
-  firebase.initializeApp(firebaseConfig);
-  
-  // Check auth state
-  firebase.auth().onAuthStateChanged((user) => {
-    const userStatus = document.getElementById('userStatus');
-    const settingsMenu = document.getElementById('settingsMenu');
-    
-    if (user) {
-      userStatus.textContent = 'Account';
-      settingsMenu.innerHTML = `
-        <ul>
-          <li>👤 ${user.email}</li>
-          <li><a href="#" id="logoutBtn">🚪 Logout</a></li>
-        </ul>
-      `;
-      
-      document.getElementById('logoutBtn').addEventListener('click', (e) => {
-        e.preventDefault();
-        firebase.auth().signOut().then(() => {
-          window.location.reload();
-        });
-      });
-    } else {
-      userStatus.textContent = 'Login';
-      settingsMenu.innerHTML = `
-        <ul>
-          <li><a href="login.html">👤 Login</a></li>
-          <li><a href="register.html">📝 Register</a></li>
-        </ul>
-      `;
-    }
-  });
-</script>
-
-
-<header>
-  <div class="logo">
-    <img src="logo.png" alt="Scanner.ac Logo" height="40" />
-  </div>
-  <nav class="header-buttons">
-    <a href="#pricing" class="neon-nav-btn">Price</a>
-    <a href="https://discord.gg/PJf2Be9m" target="_blank" class="neon-nav-btn">Discord</a>
-    <a href="#changelog" class="neon-nav-btn">Changelog</a>
-    <a href="login.html" class="neon-nav-btn">Login</a> <!-- تم التعديل هنا -->
-  </nav>
-</header>
-
-<!-- Login Menu (Hidden) -->
-<div id="settingsMenu" class="hidden menu">
-  <ul>
-    <li>👤 Account</li>
-    <li>🚪 Logout</li>
-  </ul>
-</div>
-
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Scanner.ac</title>
-  <link rel="stylesheet" href="style.css" />
+        .info {
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: #0000ff; 
+            text-shadow: 0px 0px 8px #0000ff, 0px 0px 15px #0000ff, 0px 0px 25px #0000ff; 
+            letter-spacing: 4.5px; 
+            white-space: pre-wrap;
+        }
+        .text {
+            margin-top: 20px;
+            font-size: 3em; 
+            color: #0000ff; 
+            text-shadow: 0px 0px 8px #0000ff, 0px 0px 15px #0000ff, 0px 0px 25px #0000ff; 
+            letter-spacing: 4.5px; 
+        }
+    </style>
 </head>
 <body>
+    <div class="image-container">
+        <img src="https://cdn.discordapp.com/avatars/805145713855037482/6fd96a9a080161417c8f47bb657ebd19.webp?size=1024" alt="Discord Image">
+    </div>
+    <audio autoplay loop>
+        <source src="حط الاغنيه الي تبيها" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <div class="info" id="ip-info">
+        <strong>IP: <span id="ip"></span></strong><br>
+        <span><strong>City:</strong> <span id="city"></span></span><br>
+        <span><strong>Region:</strong> <span id="region"></span></span><br>
+        <span><strong>Country:</strong> <span id="country"></span></span><br>
+        <span><strong>Location:</strong> <span id="loc"></span></span><br>
+        <span><strong>Organization:</strong> <span id="org"></span></span><br>
+        <span><strong>Timezone:</strong> <span id="timezone"></span></span>
+    </div>
+    <div class="text">discord.gg/R.I.S.K</div>
 
-  <!-- Preloader Screen (Capture 2 Style) -->
-  <div id="preloader">
-    <div class="spinner"></div>
-  </div>
-
-  <!-- Your Actual Website -->
-  <div id="mainContent" style="display:none;">
-    <!-- Put all your real site content here -->
-    <h1>Welcome to Scanner.ac</h1>
-  </div>
-
-  <script>
-    // Wait 3 seconds then hide preloader
-    window.addEventListener("load", function () {
-      setTimeout(function () {
-        document.getElementById("preloader").style.display = "none";
-        document.getElementById("mainContent").style.display = "block";
-      }, 1000);
-    });
-  </script>
-
+    <script>
+         fetch('https://ipinfo.io/json')
+        .then(response => response.json())
+        .then(data => {
+            delete data.readme;
+            const infoDiv = document.getElementById('ip-info');
+            infoDiv.textContent = JSON.stringify(data, null, 2);
+        });
+    </script>
 </body>
-
 </html>
-<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
